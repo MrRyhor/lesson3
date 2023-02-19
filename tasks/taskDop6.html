@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>TaskDop nr. 6</h1>
+    <div class="text">Полювання. Заєць знаходиться у верхньому лівому кутку поля. Поле складається з двох рядків і двох
+        стовпців. За один крок заєць може стрибнути у будь-яку із вільних клітинок. Користувач ставить пастку вказуючи
+        номер рядка і
+        стовпця клітинки. Якщо заєць потрапляє у пастку, то користувач виграв і отримав 100 балів. Якщо користувач
+        зловить зайця
+        за другою спробою, то одержує 50 балів.</div>
+    <div class="result">Result</div>
+    <div id="result1"></div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato:regular,700');
+
+        body {
+            font-family: 'Lato';
+            background-color: #00a1a3;
+            background-image: linear-gradient(to right, #005083, #23704e);
+        }
+
+        h1 {
+            display: block;
+            max-width: 170px;
+            margin: 0 auto;
+            text-shadow: 2px 2px 4px #000;
+            text-align: center;
+            text-transform: uppercase;
+            color: rgb(251, 255, 26);
+            font-weight: 700;
+        }
+
+        .text {
+            padding-top: 20px;
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+            max-width: 700px;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .result {
+            padding-top: 50px;
+            margin: 0 auto;
+            text-align: center;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            position: relative;
+            font-size: 32px;
+        }
+
+        .result::after {
+            content: " ";
+            background: url('img/left-arrow.png') no-repeat;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 80px;
+            left: 48.7%;
+            transform: rotate(-90deg);
+            z-index: 1;
+            color: #fff;
+            object-fit: cover;
+            animation-name: down-arrow;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes down-arrow {
+            0% {
+                top: 80px;
+            }
+
+            100% {
+                top: 100px;
+            }
+        }
+
+        #result1 {
+            padding-top: 70px;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            color: rgb(251, 255, 26);
+            text-transform: uppercase;
+            font-size: 32px;
+            font-weight: 700;
+        }
+    </style>
+
+    <script>
+        // 0. Задаём кол-во строк и ищем рандомную строку
+        const minRow = 1
+        const maxRow = 2
+        let randomRow = minRow + Math.floor(Math.random() * (maxRow - minRow + 1))
+
+        // 1. Задаём кол-во столбцов и ищем рандомный столбец
+        const minColumn = 1
+        const maxColumn = 2
+        let randomColumn = minColumn + Math.floor(Math.random() * (maxColumn - minColumn + 1))
+
+        console.log(randomRow) // для проверкаи
+        console.log(randomColumn) // для проверкаи
+
+
+        // 2. Просим пользователя поставить ловушку выбирая сначала число строки и затем число столбца
+        let userRowNumber = parseInt(prompt('Введите число по горизонтали:'))
+        let userColumnNumber = parseInt(prompt('Введите число по вертикали:'))
+
+        // 3. Делаем проверку на все не коректно введённые числа
+
+        if (userRowNumber > maxRow && userColumnNumber > maxColumn)
+            result1.innerHTML = 'Вы ввели не коректное число :('
+        else if (userRowNumber <= maxRow && userColumnNumber > maxColumn)
+            result1.innerHTML = 'Вы ввели не коректное число :('
+        else if (userRowNumber > maxRow && userColumnNumber <= maxColumn)
+            result1.innerHTML = 'Вы ввели не коректное число :('
+
+        // 4. Если userRowNumber === randomRow и userColumnNumber === randomRow - ПОЙМАЛ
+        //    Иначе заяц прыгает и вновь ставим ловушку
+        //    Если userRowNumber === randomRow и userColumnNumber === randomRow - ПОЙМАЛ
+        else if (userRowNumber <= maxRow && userColumnNumber <= maxColumn)
+            if (userRowNumber === randomRow && userColumnNumber === randomColumn)
+                result1.innerHTML = `Вы поймали зайца он находился в клетке:</br> по горизонтали в "${randomRow}" по вертикали в "${randomColumn}"`
+            else {
+                alert('Мимо ! Попытка №2. Попробуйте ещё раз и нажмите ОК')
+
+                randomRow = minRow + Math.floor(Math.random() * (maxRow - minRow + 1))
+                randomColumn = minColumn + Math.floor(Math.random() * (maxColumn - minColumn + 1))
+
+                console.log(randomRow) // для проверкаи
+                console.log(randomColumn) // для проверкаи
+
+                userRowNumber = parseInt(prompt('Введите число по горизонтали:'))
+                userColumnNumber = parseInt(prompt('Введите число по вертикали:'))
+
+                if (userRowNumber === randomRow && userColumnNumber === randomColumn)
+                    result1.innerHTML = `Вы поймали зайца он находился в клетке:</br> по горизонтали в "${randomRow}" по вертикали в "${randomColumn}"`
+                else
+                    result1.innerHTML = `Увы, Вам не повезло :( Заяц находился в клетке:</br> по горизонтали в "${randomRow}" по вертикали в "${randomColumn}"`
+            }
+    </script>
+</body>
+
+</html>

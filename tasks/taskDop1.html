@@ -9,8 +9,13 @@
 </head>
 
 <body>
-    <h1>Task nr. 7</h1>
-    <div class="text">З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься</div>
+    <h1>TaskDop nr. 1</h1>
+    <div class="text">Выбери номер смайла: веселый, грустный, злой</div>
+    <ol>
+        <li>Веселый</li>
+        <li>Грустный</li>
+        <li>Злой</li>
+    </ol>
     <div class="result">Result</div>
     <div id="result1"></div>
 
@@ -42,6 +47,21 @@
             max-width: 700px;
             font-size: 20px;
             font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        ol {
+            padding-top: 30px;
+            padding-left: 145px;
+            max-width: 200px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+            box-shadow: 1px 1px 12px #000;
+        }
+
+        li {
+            color: #fff;
+            font-size: 18px;
         }
 
         .result {
@@ -62,7 +82,7 @@
             height: 50px;
             position: absolute;
             top: 80px;
-            left: 48.7%;
+            left: 49%;
             transform: rotate(-90deg);
             z-index: 1;
             color: #fff;
@@ -95,31 +115,25 @@
             font-weight: 700;
         }
     </style>
+
     <script>
-        // 0. Вводим мин и макс знач поры года
-        const minMonthWinter = 12
-        const maxMonthWinter = 2
-        const maxMonthSpring = 5
-        const maxMonthSummer = 8
-        const maxMonthAutmn = 11
+        // 0. Вводим с экрана номер реакции
+        let numberOfReaction = parseInt(prompt('Enter number of reaction from 1 to 3:', '0'))
 
-        // 1. Вводим номер месяца с экрана
-        let numberOfMonth = parseInt(prompt('Enter number of month from 1 to 12:', '0'))
+        // 1. Если 1 - смайл :), если 2 - смайл :(, если 3- смайл 3
+        var result
 
-        // 2. Если numberOfMonth == minMonthWinter или numberOfMonth <= maxMonthWinter - WINTER
-        //    Если numberOfMonth <= maxMonthSpring - SPRING
-        //    Если numberOfMonth <= maxMonthSummer - SUMMER
-        //    Если numberOfMonth <= maxMonthAutmn - AUTMN
-        if (numberOfMonth == minMonthWinter || numberOfMonth <= maxMonthWinter)
-            result1.innerHTML = `WINTER`
-        else if (numberOfMonth <= maxMonthSpring)
-            result1.innerHTML = `SPRING`
-        else if (numberOfMonth <= maxMonthSummer)
-            result1.innerHTML = `SUMMER`
-        else if (numberOfMonth <= maxMonthAutmn)
-            result1.innerHTML = `AUTMN`
-        else
-            result1.innerHTML = `Incorrect number of month :(`      
+        switch (numberOfReaction) {
+            case 1: result = '&#128512'
+                break;
+            case 2: result = '&#128532'
+                break;
+            case 3: result = '&#128534'
+                break;
+            default: result = 'Unknown number of reaction'
+                break;
+        }
+        result1.innerHTML = `${result}`
     </script>
 </body>
 

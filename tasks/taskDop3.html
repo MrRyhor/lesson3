@@ -9,8 +9,9 @@
 </head>
 
 <body>
-    <h1>Task nr. 3</h1>
-    <div class="text">Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.</div>
+    <h1>TaskDop nr. 3</h1>
+    <div class="text">Комп’ютер загадує число від 1 до 10. Двоє користувачів надають свої відповіді. Виграє той, у кого
+        число знаходиться ближче до загаданого комп’ютером числа.</div>
     <div class="result">Result</div>
     <div id="result1"></div>
 
@@ -97,37 +98,27 @@
     </style>
 
     <script>
-        // 0. Задаем макс. и мин. значения интервала. Генерируем случайное число в константу
+        // 0. Генерируем рандомное число от 1 до 10
         const minRandomNumber = 1
-        const maxRandomNumber = 5
-        // формула генерации рандомного числа в интервале мин. до макс.
+        const maxRandomNumber = 10
         const randomNumber = minRandomNumber + Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1))
+        console.log(randomNumber)  // выводим в консоль для проверки
 
-        // выводим в консоль рандомное число для проверки
-        console.log(randomNumber)
-        // 1. Вводим с экрана числа для попытки 1
-        let guessNumber = parseInt(prompt('Попытка №1. Угадайте число от 1 до 5:', '0'))
+        // 1. Вводим числа с экрана от чела 1 и чела 2
+        let numberMan1 = parseInt(prompt('Man 1 - enter the number from 1 to 10:', '0'))
+        let numberMan2 = parseInt(prompt('Man 2 - enter the number from 1 to 10:', '0'))
 
-        // 2. Проверяем сначала на корректно введёные числа
-        //    Если guessNumber === randomNumber то показываем сообщ. Bravo!
-        //    иначе сообщ.: вам не повезло
-        if (guessNumber === randomNumber)
-            //alert('Браво! Вы угадали число с первой попытки')
-            result1.innerHTML = `Браво! Вы угадали число с первой попытки`
-        else {
-            alert('Вам не повезло. Попробуйте угадать со 2-ой попытки')
+        // 2. Получаем рез-ты разности рандома и вводимого числа, для сверки рез-тов и определен. выигравшего
+        resultMan1 = Math.abs(randomNumber - numberMan1)
+        resultMan2 = Math.abs(randomNumber - numberMan2)
 
-
-            // 3. Внутри блока else вводим с экрана 2-ое значение для переменной guessNumber попытка 2
-            guessNumber = parseInt(prompt('Попытка №2. Угадайте число от 1 до 5:', '0'))
-            if (guessNumber === randomNumber)
-                //alert(`Браво! Вы угадали число со второй попытки. Загаданное число = ${randomNumber} :)`)
-                result1.innerHTML = `Браво! Вы угадали число со второй попытки. Загаданное число = ${randomNumber} :)`
-            else {
-                alert(`Увы, Вам не повезло :(`)
-                result1.innerHTML = `Удачи следующтй раз! Для продолжения игры нажмите обновить браузер.`
-            }
-        }
+        // 3. Если рез-тат разности чела 1 < чела 2 то чел 1 выиграл, иначе выиграл чел 2, если =, то ничья
+        if (resultMan1 === resultMan2)
+            result1.innerHTML = `A draw, no one won. The number is ${randomNumber}`
+        else if (resultMan1 < resultMan2)
+            result1.innerHTML = `Man 1 is a winner! The number is ${randomNumber}`
+        else
+            result1.innerHTML = `Man 2 is a winner! The number is ${randomNumber}`
     </script>
 </body>
 

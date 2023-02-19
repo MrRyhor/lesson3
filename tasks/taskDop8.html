@@ -9,8 +9,10 @@
 </head>
 
 <body>
-    <h1>Task nr. 7</h1>
-    <div class="text">З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься</div>
+    <h1>TaskDop nr. 8</h1>
+    <div class="text">З клавіатури вводиться кількість сторін багатокутника. Необхідно вивести назву фігури
+        («трикутник», «чотирикутник»,
+        «п’ятикутинк», «шестикутник»).</div>
     <div class="result">Result</div>
     <div id="result1"></div>
 
@@ -94,32 +96,30 @@
             font-size: 32px;
             font-weight: 700;
         }
+
+        span {
+            color: rgb(255, 82, 82);
+        }
     </style>
+
     <script>
-        // 0. Вводим мин и макс знач поры года
-        const minMonthWinter = 12
-        const maxMonthWinter = 2
-        const maxMonthSpring = 5
-        const maxMonthSummer = 8
-        const maxMonthAutmn = 11
+        const numberSidesPolygon = parseInt(prompt('Введите количество сторон многоугольника от 3 до 6:', '0'))
+        let result
 
-        // 1. Вводим номер месяца с экрана
-        let numberOfMonth = parseInt(prompt('Enter number of month from 1 to 12:', '0'))
+        switch (numberSidesPolygon) {
+            case 3: result = 'треугольник'
+                break;
+            case 4: result = 'четырехугольник'
+                break;
+            case 5: result = 'пятиугольник'
+                break;
+            case 6: result = 'шестиугольник'
+                break;
+            default: result = 'Вы ввели не коректное число'
+                break;
+        }
 
-        // 2. Если numberOfMonth == minMonthWinter или numberOfMonth <= maxMonthWinter - WINTER
-        //    Если numberOfMonth <= maxMonthSpring - SPRING
-        //    Если numberOfMonth <= maxMonthSummer - SUMMER
-        //    Если numberOfMonth <= maxMonthAutmn - AUTMN
-        if (numberOfMonth == minMonthWinter || numberOfMonth <= maxMonthWinter)
-            result1.innerHTML = `WINTER`
-        else if (numberOfMonth <= maxMonthSpring)
-            result1.innerHTML = `SPRING`
-        else if (numberOfMonth <= maxMonthSummer)
-            result1.innerHTML = `SUMMER`
-        else if (numberOfMonth <= maxMonthAutmn)
-            result1.innerHTML = `AUTMN`
-        else
-            result1.innerHTML = `Incorrect number of month :(`      
+        result1.innerHTML = `Название многоугольника: <span>${result}</span>`
     </script>
 </body>
 

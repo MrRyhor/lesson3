@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>TaskDop nr. 2</h1>
+    <div class="text">Комп’ютер випадковим чином вибирає початок і кінець проміжку (проміжок повинен знаходитися в межах
+        від 1 до 100). Користувач вводить число і виграє, якщо число знаходиться у цьому проміжку, або розташоване від
+        нього (від лівого або правого краю) не більше ніж на 10.</div>
+    <div class="result">Result</div>
+    <div id="result1"></div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato:regular,700');
+
+        body {
+            font-family: 'Lato';
+            background-color: #00a1a3;
+            background-image: linear-gradient(to right, #005083, #23704e);
+        }
+
+        h1 {
+            display: block;
+            max-width: 170px;
+            margin: 0 auto;
+            text-shadow: 2px 2px 4px #000;
+            text-align: center;
+            text-transform: uppercase;
+            color: rgb(251, 255, 26);
+            font-weight: 700;
+        }
+
+        .text {
+            padding-top: 20px;
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+            max-width: 700px;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .result {
+            padding-top: 50px;
+            margin: 0 auto;
+            text-align: center;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            position: relative;
+            font-size: 32px;
+        }
+
+        .result::after {
+            content: " ";
+            background: url('img/left-arrow.png') no-repeat;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 80px;
+            left: 48.7%;
+            transform: rotate(-90deg);
+            z-index: 1;
+            color: #fff;
+            object-fit: cover;
+            animation-name: down-arrow;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes down-arrow {
+            0% {
+                top: 80px;
+            }
+
+            100% {
+                top: 100px;
+            }
+        }
+
+        #result1 {
+            padding-top: 70px;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            color: rgb(251, 255, 26);
+            text-transform: uppercase;
+            font-size: 32px;
+            font-weight: 700;
+        }
+    </style>
+
+    <script>
+        // 0. Получаем в константу начало и конец рандомного отрезка от 1 до 100
+        const starMinRandomЫSection = 1
+        const startMaxRandomSection = 100
+        const startRandomSection = starMinRandomЫSection + Math.floor(Math.random() * (startMaxRandomSection - starMinRandomЫSection + 1))
+        const endMinRandomЫSection = 1
+        const endMaxRandomSection = 100
+        const endRandomSection = endMinRandomЫSection + Math.floor(Math.random() * (endMaxRandomSection - endMinRandomЫSection + 1))
+
+        // Задаём границы допустимой разбежки от start и end в константы
+        const rangeFromRandomSection = 10
+
+        console.log(startRandomSection) // для проверки
+        console.log(endRandomSection)   // для проверки
+
+        // 1. Вводим с экрана число
+        let userNumber = parseInt(prompt('Please enter the number from 1 to 100:', '0'))
+
+        // 2. Ищем разницу между userNumber и крайними границами отрезка
+        let differenceUserAndStartRandomSection = Math.abs(userNumber - startRandomSection)
+        let differenceUserAndEndRandomSection = Math.abs(userNumber - endRandomSection)
+
+        // если первое число отрезка меньше второго, то одно ветвление, если больше, то второе
+        // а) если usrNumber в пределах отрезка то - ЛАКИ
+        // б) если число вне отрезка (первой и второй границы) отличается меньше чем на rangeFromRandomSection - ЛАКИ       
+        // такая же аналогия для второго ветвления, только наоборот в первом условии
+        if (startRandomSection < endRandomSection) {
+            if (userNumber >= startRandomSection && userNumber <= endRandomSection)
+                result1.innerHTML = 'Bravo! You get lucky!'
+            else if (differenceUserAndStartRandomSection <= rangeFromRandomSection)
+                result1.innerHTML = 'Bravo! You get lucky!'
+            else if (differenceUserAndEndRandomSection <= rangeFromRandomSection)
+                result1.innerHTML = 'Bravo! You get lucky!'
+            else
+                result1.innerHTML = 'Sorry you are not a winner :('
+        } else if (startRandomSection > endRandomSection) {
+            if (userNumber <= startRandomSection && userNumber >= endRandomSection)
+                result1.innerHTML = 'Bravo! You get lucky!'
+            else if (differenceUserAndStartRandomSection <= rangeFromRandomSection)
+                result1.innerHTML = 'Bravo! You get lucky!'
+            else if (differenceUserAndEndRandomSection <= rangeFromRandomSection)
+                result1.innerHTML = 'Bravo! You get lucky!'
+            else
+                result1.innerHTML = 'Sorry you are not a winner :('
+        }
+
+    </script>
+</body>
+
+</html>

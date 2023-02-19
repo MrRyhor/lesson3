@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>TaskDop nr. 7</h1>
+    <div class="text">Гра в кості. Правила гри:
+        1) користувач може кинути кості не більше двох разів (користувач сам вирішує чи робити, чи не робити другий
+        кидок);
+        2) якщо випадає парне число, то кількість балів збільшується на це число;
+        3) якщо випадає непарне число, то кількість балів зменшується на це число;
+        4) виграє той, у кого кількість балів більша.
+    </div>
+    <div class="result">Result</div>
+    <div id="result1"></div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato:regular,700');
+
+        body {
+            font-family: 'Lato';
+            background-color: #00a1a3;
+            background-image: linear-gradient(to right, #005083, #23704e);
+        }
+
+        h1 {
+            display: block;
+            max-width: 170px;
+            margin: 0 auto;
+            text-shadow: 2px 2px 4px #000;
+            text-align: center;
+            text-transform: uppercase;
+            color: rgb(251, 255, 26);
+            font-weight: 700;
+        }
+
+        .text {
+            padding-top: 20px;
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+            max-width: 700px;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .result {
+            padding-top: 50px;
+            margin: 0 auto;
+            text-align: center;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            position: relative;
+            font-size: 32px;
+        }
+
+        .result::after {
+            content: " ";
+            background: url('img/left-arrow.png') no-repeat;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 80px;
+            left: 48.7%;
+            transform: rotate(-90deg);
+            z-index: 1;
+            color: #fff;
+            object-fit: cover;
+            animation-name: down-arrow;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes down-arrow {
+            0% {
+                top: 80px;
+            }
+
+            100% {
+                top: 100px;
+            }
+        }
+
+        #result1 {
+            padding-top: 70px;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            color: rgb(251, 255, 26);
+            text-transform: uppercase;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        span {
+            color: rgb(255, 82, 82);
+        }
+    </style>
+
+    <script>
+        const minCubeNumber = 1
+        const maxCubeNumber = 6
+
+        alert('Игрок 1. Кидайте кубик')
+
+        let randomCubeNumber = minCubeNumber + Math.floor(Math.random() * (maxCubeNumber - minCubeNumber + 1))
+
+        alert(`Выпало число: ${randomCubeNumber}`)
+
+        let nextStep
+        let pointsPlayer1
+        let pointsPlayer2
+
+        if (randomCubeNumber % 2 === 0) {
+            pointsPlayer1 = randomCubeNumber + randomCubeNumber
+
+            alert(`Колличество баллов Игрок 1 = ${pointsPlayer1}`)
+
+            nextStep = prompt(`Желаете ли бросить кубик ещё раз? Если ДА то введите "Y", если НЕТ то "N"`)
+            if (nextStep === 'Y') {
+                randomCubeNumber = minCubeNumber + Math.floor(Math.random() * (maxCubeNumber - minCubeNumber + 1))
+                alert(`Выпавшее число ${randomCubeNumber}`)
+
+                if (randomCubeNumber % 2 === 0) {
+                    pointsPlayer1 = pointsPlayer1 + randomCubeNumber
+
+                    alert(`Ваше общее количетво баллов Игрок 1 = ${pointsPlayer1}`)
+                    alert('Игрок 2 кидает свой кубик')
+                } if (randomCubeNumber % 2 > 0) {
+                    pointsPlayer1 = pointsPlayer1 - randomCubeNumber
+                    alert(`Ваше общее количетво баллов Игрок 1 = ${pointsPlayer1}`)
+                    alert('Игрок 2 кидает свой кубик')
+
+                }
+            } else if (nextStep === 'N')
+                alert('Игрок 2 кидает свой кубик')
+
+        } if (randomCubeNumber % 2 > 0) {
+            pointsPlayer1 = randomCubeNumber - randomCubeNumber
+
+            alert(`Ваше количество баллов Игрок 1 = ${pointsPlayer1}`)
+            nextStep = prompt(`Желаете ли бросить кубик ещё раз? Если ДА то введите "Y", если НЕТ то "N"`)
+            if (nextStep === 'Y') {
+                randomCubeNumber = minCubeNumber + Math.floor(Math.random() * (maxCubeNumber - minCubeNumber + 1))
+                alert(`Выпавшее число ${randomCubeNumber}`)
+
+                if (randomCubeNumber % 2 === 0) {
+                    pointsPlayer1 = pointsPlayer1 + randomCubeNumber
+
+                    alert(`Ваше общее количетво баллов Игрок 1 = ${pointsPlayer1}`)
+                    alert('Игрок 2 кидает свой кубик')
+
+                } if (randomCubeNumber % 2 > 0) {
+                    pointsPlayer1 = pointsPlayer1 - randomCubeNumber
+                    alert(`Ваше общее количетво баллов Игрок 1 = ${pointsPlayer1}`)
+                    alert('Игрок 2 кидает свой кубик')
+
+                }
+            } else if (nextStep = 'N')
+                alert('Игрок 2 кидает свой кубик')
+        }
+
+        randomCubeNumber = minCubeNumber + Math.floor(Math.random() * (maxCubeNumber - minCubeNumber + 1))
+        alert(`Выпавшее число ${randomCubeNumber}`)
+
+        if (randomCubeNumber % 2 === 0) {
+            pointsPlayer2 = randomCubeNumber + randomCubeNumber
+
+            alert(`Колличество баллов Игрок 2 = ${pointsPlayer2}`)
+
+            nextStep = prompt(`Желаете ли бросить кубик ещё раз? Если ДА то введите "Y", если НЕТ то "N"`)
+            if (nextStep === 'Y') {
+                randomCubeNumber = minCubeNumber + Math.floor(Math.random() * (maxCubeNumber - minCubeNumber + 1))
+                alert(`Выпавшее число ${randomCubeNumber}`)
+
+                if (randomCubeNumber % 2 === 0) {
+                    pointsPlayer2 = pointsPlayer2 + randomCubeNumber
+
+                    alert(`Ваше общее количетво баллов Игрок 2 = ${pointsPlayer2}`)
+                    alert('Смотрим результат')
+
+                } if (randomCubeNumber % 2 > 0) {
+                    pointsPlayer2 = pointsPlayer2 - randomCubeNumber
+                    alert(`Ваше общее количетво баллов Игрок 2 = ${pointsPlayer2}`)
+                    alert('Смотрим результат')
+                }
+            } else if (nextStep === 'N')
+                alert('Смотрим результат')
+
+
+        } if (randomCubeNumber % 2 > 0) {
+            pointsPlayer2 = randomCubeNumber - randomCubeNumber
+
+            alert(`Ваше количество баллов Игрок 2 = ${pointsPlayer2}`)
+            nextStep = prompt(`Желаете ли бросить кубик ещё раз? Если ДА то введите "Y", если НЕТ то "N"`)
+            if (nextStep === 'Y') {
+                randomCubeNumber = minCubeNumber + Math.floor(Math.random() * (maxCubeNumber - minCubeNumber + 1))
+                alert(`Выпавшее число ${randomCubeNumber}`)
+
+                if (randomCubeNumber % 2 === 0) {
+                    pointsPlayer2 = pointsPlayer2 + randomCubeNumber
+
+                    alert(`Ваше общее количетво баллов Игрок 2 = ${pointsPlayer2}`)
+                    alert('Смотрим результат')
+
+
+                } if (randomCubeNumber % 2 > 0) {
+                    pointsPlayer2 = pointsPlayer2 - randomCubeNumber
+                    alert(`Ваше общее количетво баллов Игрок 2 = ${pointsPlayer2}`)
+                    alert('Смотрим результат')
+
+
+                }
+            } else if (nextStep = 'N')
+                alert('Cмотрим результат')
+        }
+
+        alert(`Кол-во баллов: Игрок 1 = ${pointsPlayer1} и Игрок 2 = ${pointsPlayer2}`)
+
+        if (pointsPlayer1 === pointsPlayer2)
+            result1.innerHTML = `У вас ничья. <span>Игрок 1:</span> ${pointsPlayer1} балла = <span>Игрок 2:</span> ${pointsPlayer2} балла`
+        else if (pointsPlayer1 > pointsPlayer2)
+            result1.innerHTML = `<span>Игрок 1</span> победил!. <span>Игрок1:</span> ${pointsPlayer1} баллов > <span>Игрок 2:</span> ${pointsPlayer2} баллов`
+        else
+            result1.innerHTML = `</span>Игрок 2</span> победил!. <span>Игрок1:</span> ${pointsPlayer1} баллов < <span>Игрок 2:</span> ${pointsPlayer2} баллов`
+
+
+    </script>
+</body>
+
+</html>

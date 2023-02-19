@@ -101,17 +101,19 @@
         // 0. Вводим с экрана константы
         const itemPrice = parseFloat(prompt('Enter item price, UAH:', '0.0'))
         const amountOfMoney = parseFloat(prompt('Etnter amoun of money, UAH:', '0.0'))
+        // Вводим константой цену лотореи
+        const lotteryPrice = 4
 
         // 1. Высчитываем в константу хватит ли денег
-        const isEnoughMoney = Math.floor(amountOfMoney / itemPrice)
-        const balanceOfEnoughMoney = amountOfMoney % itemPrice
-        console.log(isEnoughMoney)
+        const isEnoughMoney = amountOfMoney - itemPrice
+        console.log(isEnoughMoney) // для проверки
 
-        // 2. Если isEnoughMoney == 0 тогда выводим сообщ. об отказе в покупке
-        // иначе если balanceOfEnoughMoney >= 4 предлагаем купить лоторею
-        if (isEnoughMoney == 0)
-            result1.innerHTML = `reject your purchase`
-        else if (balanceOfEnoughMoney > 0)
+        // 2. Если isEnoughMoney < 0 тогда выводим сообщ. об отказе в покупке
+        //    Если isEnoughMoney >= 4 предлагаем купить лоторею
+        //    иначе - спасибо за покупку
+        if (isEnoughMoney < 0)
+            result1.innerHTML = `Sorry you do not have enough money :(`
+        else if (isEnoughMoney >= lotteryPrice)
             result1.innerHTML = `maybe you want to buy a lottery for 4 UAH?`
         else
             result1.innerHTML = `Thank you for the purchase`

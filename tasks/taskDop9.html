@@ -9,8 +9,10 @@
 </head>
 
 <body>
-    <h1>Task nr. 7</h1>
-    <div class="text">З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься</div>
+    <h1>TaskDop nr. 9</h1>
+    <div class="text">З клавіатури вводиться перша літера розширення файлу («html», «doc», «jpeg», «mp3», «xls»).
+        Вивести на екран назву
+        програми, яка може відкрити цей тип файлу.</div>
     <div class="result">Result</div>
     <div id="result1"></div>
 
@@ -94,32 +96,38 @@
             font-size: 32px;
             font-weight: 700;
         }
+
+        span {
+            color: rgb(255, 82, 82);
+        }
     </style>
+
     <script>
-        // 0. Вводим мин и макс знач поры года
-        const minMonthWinter = 12
-        const maxMonthWinter = 2
-        const maxMonthSpring = 5
-        const maxMonthSummer = 8
-        const maxMonthAutmn = 11
+        // const h = 'html'
+        // const d = 'doc'
+        // const j = 'jpeg'
+        // const m = 'mp3'
+        // const x = 'xls'
+        const typeDocument = prompt('Введите первую букву расширения файла:', 'h, d, j, m, x')
 
-        // 1. Вводим номер месяца с экрана
-        let numberOfMonth = parseInt(prompt('Enter number of month from 1 to 12:', '0'))
+        let result
 
-        // 2. Если numberOfMonth == minMonthWinter или numberOfMonth <= maxMonthWinter - WINTER
-        //    Если numberOfMonth <= maxMonthSpring - SPRING
-        //    Если numberOfMonth <= maxMonthSummer - SUMMER
-        //    Если numberOfMonth <= maxMonthAutmn - AUTMN
-        if (numberOfMonth == minMonthWinter || numberOfMonth <= maxMonthWinter)
-            result1.innerHTML = `WINTER`
-        else if (numberOfMonth <= maxMonthSpring)
-            result1.innerHTML = `SPRING`
-        else if (numberOfMonth <= maxMonthSummer)
-            result1.innerHTML = `SUMMER`
-        else if (numberOfMonth <= maxMonthAutmn)
-            result1.innerHTML = `AUTMN`
-        else
-            result1.innerHTML = `Incorrect number of month :(`      
+        switch (typeDocument) {
+            case 'h': result = `Тип файла <span>'html'</span> - можно открыть с помощью <span>VSCode</span>`
+                break;
+            case 'd': result = `Тип файла <span>'doc'</span> - можно открыть с помощью <span>Word</span>`
+                break;
+            case 'j': result = `Тип файла <span>'jpg'</span> - можно открыть с помощью <span>Photoshop</span>`
+                break;
+            case 'm': result = `Тип файла <span>'mp3'</span> - можно открыть с помощью <span>Winamp</span>`
+                break;
+            case 'x': result = `Тип файла <span>'xls'</span> - можно открыть с помощью <span>Excel</span>`
+                break;
+            default: result = 'Вы ввели не коректную начальную букву расширения файла'
+                break;
+        }
+
+        result1.innerHTML = `${result}`
     </script>
 </body>
 

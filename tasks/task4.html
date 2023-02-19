@@ -99,38 +99,29 @@
 
     <script>
         // 0. Вводим мин и макс значения длф возрастов
-        const minPreschoolAge = 2
         const maxPreschoolAge = 5
-        const minSchoolAge = 6
         const maxSchoolAge = 16
-        const minUniversityAge = 17
         const maxUniversityAge = 22
-        const minWorkingAge = 23
         const maxWorkingAge = 62
-        const minRetiredAge = 63
-        const maxRetiredAge = 150
 
         // 1. Вводим возраст человека с экрана
         let userAge = parseInt(prompt('Enter your current age:', '0'))
 
-        // 2. если userAge >= minPreschoolAge или userAge <= minPreschoolAge - message: Preschool age
-        //    если userAge >= minSchoolAge или userAge <= maxSchoolAge - message: School age
-        //    если userAge >= minUniversityAge или userAge <= maxUniversityAge - message: University age
-        //    если userAge >= minWorkingAge или userAge <= maxWorkingAge - message: Working age
-        //    если userAge >= minRetiredAge или userAge <= maxRetiredAge - message: Retired age age
-        //    иначе message: You are the alian :)
-        if (userAge == minPreschoolAge || userAge <= maxPreschoolAge)
+        // 2. если userAge <= minPreschoolAge - message: Preschool age
+        //    если userAge <= maxSchoolAge - message: School age
+        //    если userAge <= maxUniversityAge - message: University age
+        //    если userAge <= maxWorkingAge - message: Working age
+        //    иначе message: Retired Age
+        if (userAge <= maxPreschoolAge)
             result1.innerHTML = `Preschool age`
-        else if (userAge == minSchoolAge || userAge <= maxSchoolAge)
+        else if (userAge <= maxSchoolAge)
             result1.innerHTML = `School age`
-        else if (userAge == minUniversityAge || userAge <= maxUniversityAge)
+        else if (userAge <= maxUniversityAge)
             result1.innerHTML = `University age`
-        else if (userAge == minWorkingAge || userAge <= maxWorkingAge)
+        else if (userAge <= maxWorkingAge)
             result1.innerHTML = `Working age`
-        else if (userAge == minRetiredAge || userAge <= maxRetiredAge)
-            result1.innerHTML = `Retired age`
         else
-            result1.innerHTML = `You are the Alien :)`
+            result1.innerHTML = `Retired Age`
 
     </script>
 </body>

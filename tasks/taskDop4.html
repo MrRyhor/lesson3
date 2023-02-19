@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>TaskDop nr. 4</h1>
+    <div class="text">Морський бій. Ворожий корабель, може знаходитись в одному із квадратів (кількість квадратів
+        вводиться з клавіатури), які розташовані лінійно (один за одним) на річці.</div>
+    <div class="result">Result</div>
+    <div id="result1"></div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato:regular,700');
+
+        body {
+            font-family: 'Lato';
+            background-color: #00a1a3;
+            background-image: linear-gradient(to right, #005083, #23704e);
+        }
+
+        h1 {
+            display: block;
+            max-width: 170px;
+            margin: 0 auto;
+            text-shadow: 2px 2px 4px #000;
+            text-align: center;
+            text-transform: uppercase;
+            color: rgb(251, 255, 26);
+            font-weight: 700;
+        }
+
+        .text {
+            padding-top: 20px;
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+            max-width: 700px;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .result {
+            padding-top: 50px;
+            margin: 0 auto;
+            text-align: center;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            position: relative;
+            font-size: 32px;
+        }
+
+        .result::after {
+            content: " ";
+            background: url('img/left-arrow.png') no-repeat;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 80px;
+            left: 48.7%;
+            transform: rotate(-90deg);
+            z-index: 1;
+            color: #fff;
+            object-fit: cover;
+            animation-name: down-arrow;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes down-arrow {
+            0% {
+                top: 80px;
+            }
+
+            100% {
+                top: 100px;
+            }
+        }
+
+        #result1 {
+            padding-top: 70px;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            color: rgb(251, 255, 26);
+            text-transform: uppercase;
+            font-size: 32px;
+            font-weight: 700;
+        }
+    </style>
+
+    <script>
+        // 0. Задаём мин. знач промежутка и макс вводим с экрана
+        const minRandomNumber = 1
+        const maxRandomNumber = parseInt(prompt('Введите максимальное рандомное число клеток:', '0'))
+        // 1. Находим рандомную клетку в которой находится корабль
+        const randomNumber = minRandomNumber + Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1))
+
+        // 2. делаем выстрел 1 с экрана
+        let shoot = parseInt(prompt('Попытка №1 - Выберите номер клетки в которую стреляете от 1 до макс. значения которое ввели:', '0'))
+
+        // 3. Вычисляем разницу между shoot1 - randomNumber, если разница <=1 то ранен
+        let differenceShootAndRandom = Math.abs(shoot - randomNumber)
+
+        console.log(randomNumber) // для проверки
+
+        // 4. Если shoot1 === randomNumber - убил
+        //    Если differenceShootAndRandom === 1 - ранил
+        //    иначе - промахнулся
+        if (shoot === randomNumber)
+            result1.innerHTML = `Попал точно в цель и убил корабль!`
+        else if (differenceShootAndRandom === 1) {
+            alert(`Ранил, но не убил корабль! Стреляйте ещё раз`)
+            // если ранил, то даём ещё выстрел
+            shoot = parseInt(prompt('Попытка №2 - Выберите номер клетки исходя из 1-го выстрела:', '0'))
+            if (shoot === randomNumber)
+                result1.innerHTML = `Попал точно в цель и убил корабль!`
+            else
+                result1.innerHTML = `Повезёт следующий раз. Корабль был в клетке ${randomNumber}`
+        }
+        else {
+            alert(`Увы промах :( Попробуй стрельнуть ещё раз`)
+            // 5. делаем выстрел 2 с экрана
+            shoot = parseInt(prompt('Попытка №2 - Выберите номер клетки исходя из 1-го выстрела:', '0'))
+            // 6. Вычисляем разницу между shoot2 - randomNumber, если разница <=1 то ранен
+            differenceShootAndRandom = Math.abs(shoot - randomNumber)
+
+            // 7. Повторяем проверку по анологии как в п.4.
+            if (shoot === randomNumber)
+                result1.innerHTML = `Попал точно в цель и убил корабль! Корабль был в клетке ${randomNumber}`
+            else if (differenceShootAndRandom === 1)
+                result1.innerHTML = `Ранил, но не убил корабль! Корабль был в клетке ${randomNumber}`
+            else {
+                alert('Увы, промах.')
+                result1.innerHTML = `Повезёт следующий раз. Корабль был в клетке ${randomNumber}`
+            }
+        }
+
+    </script>
+</body>
+
+</html>
